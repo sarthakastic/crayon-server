@@ -12,6 +12,22 @@ const io = new Server(httpServer, {
 
 io.on("connection", (socket) => {
   console.log("socket connected");
+
+  socket.on("beginPath", (arg) => {
+    socket.broadcast.emit("beginPath", arg);
+  });
+
+  socket.on("drawLine", (arg) => {
+    socket.broadcast.emit("drawLine", arg);
+  });
+
+  socket.on("changeConfig", (arg) => {
+    socket.broadcast.emit("changeConfig", arg);
+  });
+
+  socket.on("changeTool", (arg) => {
+    socket.broadcast.emit("changeTool", arg);
+  });
 });
 
 httpServer.listen(8000);
